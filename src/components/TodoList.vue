@@ -13,7 +13,8 @@
             <div class ='ui bottom attached green basic button' v-show="todo.done">Completed</div>
             <div class ='ui bottom attached red basic button' v-show="!todo.done">Complete</div>
         </div>       -->
-        <todo v-on:delete-todo = "deleteTodo" v-for = "todo in todos" :todo = "todo" :key = "todo.project" ></todo>
+        <todo v-on:delete-todo = "deleteTodo" v-for = "todo in todos" :todo = "todo" :key = "todo.project"
+              v-on:get-data = "getData" ></todo>
     </div>
 </template>
 <script type="text/javascript">
@@ -21,14 +22,23 @@ import Todo from './Todo'
 /* eslint-disable */ 
 export default {
     props: ['todos'] ,
+    data(){
+        return {
+            msg: ''
+        }
+    },
     components: {
-        Todo
+        Todo,
     },
     methods: {
         deleteTodo(todo) {
             const todoIndex =  this.todos.indexOf(todo);
             this.todos.splice(todoIndex,1);
         },
+        getData(todo){
+            this.msg = todo.title + ' test naja';
+            alert(this.msg);
+        }
     },
 }
 </script>

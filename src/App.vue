@@ -3,18 +3,23 @@
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
     <!-- <router-view/> -->
-    <todo-list :todos="todos"></todo-list>
+    <todo-list v-bind:todos="todos"></todo-list>
+    <!-- <create-todo v-on:create-todo="addTodo"></create-todo> -->
+    <create-todo v-on:create-todo="addTodo"></create-todo>
   </div>
 </template>
 
 <script>
 /* eslint-disable */ 
 import TodoList from './components/TodoList'
+import CreateTodo from './components/CreateTodo'
+
 export default {
   name: 'app',
   components: {
     // Add a reference to the TodoList component in the components property
     TodoList,
+    CreateTodo,
   },
   data() {
     return {
@@ -40,6 +45,12 @@ export default {
       }]
     };
   },
+  methods: {
+    addTodo(title) {
+      console.log(title);
+      this.todos.push(title);
+    }
+  }
 }
 </script>
 
